@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { specialityData } from "../assets/assets_frontend/assets";
+import { specialtyData } from "../assets/assets_frontend/assets";
 
 const Specialty = () => {
   return (
@@ -13,16 +13,16 @@ const Specialty = () => {
         your appointment hassle-free
       </p>
       <div className="flex sm:justify-center gap-4 pt-5 w-full overflow-scroll no-scrollbar">
-        {specialityData.map((item, idx) => (
+        {specialtyData.map((item, idx) => (
           <Link
-            to={`/doctors/${item.speciality}`}
+            to={`/doctors/${item.specialty}`}
             key={idx}
             onClick={() => scrollTo(0, 0)}
             className="flex flex-col items-center text-xs cursor-pointer shrink-0 hover:-translate-y-2.5
                        transition-all duration-500"
           >
             <img src={item.image} className="w-16 sm:w-24 mb-2" />
-            <p>{item.speciality}</p>
+            <p>{item.specialty}</p>
           </Link>
         ))}
       </div>

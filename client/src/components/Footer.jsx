@@ -6,8 +6,8 @@ const Footer = () => {
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
         {/* left section */}
         <div>
-          <img src={assets.logo} />
-          <p>
+          <img src={assets.logo} className="mb-5 w-40" />
+          <p className="w-full md:w-2/3 text-gray-600 leading-6">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, non
             consequatur dicta, sunt laudantium suscipit assumenda facere ullam
             veniam distinctio beatae, nobis sequi velit. Impedit nisi dolorum
@@ -17,8 +17,8 @@ const Footer = () => {
 
         {/* center section */}
         <div>
-          <p>COMPANY</p>
-          <ul>
+          <p className="text-xl font-medium mb-5">COMPANY</p>
+          <ul className="flex flex-col gap-2 text-gray-600">
             <li>Home</li>
             <li>About</li>
             <li>Contact</li>
@@ -28,8 +28,8 @@ const Footer = () => {
 
         {/* right section */}
         <div>
-          <p>GET IN TOUCH</p>
-          <ul>
+          <p className="text-xl font-medium mb-5">GET IN TOUCH</p>
+          <ul className="flex flex-col gap-2 text-gray-600">
             <li>+880.....89</li>
             <li>HealthPlus@gmail.com</li>
           </ul>
@@ -39,7 +39,9 @@ const Footer = () => {
       <div>
         {/* copyright */}
         <hr />
-        <p>Copyright 2026 @HealthPlus - All Rights Reserved</p>
+        <p className="py-5 text-sm text-center">
+          Copyright 2026 @HealthPlus - All Rights Reserved
+        </p>
       </div>
     </div>
   );
