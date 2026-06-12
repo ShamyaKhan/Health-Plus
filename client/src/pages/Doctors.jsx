@@ -7,6 +7,7 @@ const Doctors = () => {
   const navigate = useNavigate();
   const { doctors } = useContext(AppContext);
   const [filterDoctors, setFilterDoctors] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
 
   const applyFilter = () => {
     if (specialty) {
@@ -24,7 +25,18 @@ const Doctors = () => {
     <div>
       <p className="text-gray-600">Browse through specialist doctors.</p>
       <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
-        <div className="flex flex-col gap-4 text-sm text-gray-600">
+        <button
+          onClick={() => setShowFilter((prev) => !prev)}
+          className={`px-3 py-1 border rounded text-sm transition-all sm:hidden
+                     ${showFilter ? "bg-primary text-white" : ""}`}
+        >
+          Filters
+        </button>
+        <div
+          className={`flex-col gap-4 text-sm text-gray-600 ${
+            showFilter ? "flex" : "hidden sm:flex"
+          }`}
+        >
           <p
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 
                        rounded transition-all cursor-pointer 
@@ -104,7 +116,7 @@ const Doctors = () => {
               key={idx}
               onClick={() => navigate(`/appointment/${item._id}`)}
               className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer
-                       hover:-translate-y-2.5 transition-all duration-500"
+                         hover:-translate-y-2.5 transition-all duration-500"
             >
               <img src={item.image} className="bg-blue-50" />
               <div className="p-4">
