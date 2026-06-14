@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { specialtyData } from "../assets/assets_frontend/assets";
+import { specialtyData } from "../assets/assets";
 
 const Specialty = () => {
   return (

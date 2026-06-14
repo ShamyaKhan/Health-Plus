@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { assets } from "../assets/assets_frontend/assets";
+import { assets } from "../assets/assets";
 
 const MyProfile = () => {
   const [isEdit, setIsEdit] = useState(false);

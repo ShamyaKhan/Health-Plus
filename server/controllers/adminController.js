@@ -84,7 +84,7 @@ const adminLogin = async (req, res) => {
     const { email, password } = req.body;
 
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      const token = jwt.sign(email + password, JWT_SECRET);
+      const token = await jwt.sign(email + password, JWT_SECRET);
       res.json({ success: true, token });
     } else {
       res.json({ success: false, message: "Invalid Credentials!" });
