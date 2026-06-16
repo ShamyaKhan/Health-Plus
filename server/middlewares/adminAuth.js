@@ -7,13 +7,13 @@ const {
 
 const adminAuth = async (req, res, next) => {
   try {
-    const { adminToken } = req.headers;
+    const { admintoken } = req.headers;
 
-    if (!adminToken) {
+    if (!admintoken) {
       return res.json({ success: false, message: "Unauthorized Access!" });
     }
 
-    const decodedToken = jwt.verify(adminToken, JWT_SECRET);
+    const decodedToken = await jwt.verify(admintoken, JWT_SECRET);
 
     if (decodedToken !== ADMIN_EMAIL + ADMIN_PASSWORD) {
       return res.json({ success: false, message: err.message });

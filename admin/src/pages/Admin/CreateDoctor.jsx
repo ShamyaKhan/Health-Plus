@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { assets } from "../../assets/assets";
 import { AdminContext } from "../../context/AdminContext";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { BACKEND_URL } from "../../utils/constants";
 
 const CreateDoctor = () => {
   const [docImage, setDocImage] = useState(false);
@@ -39,6 +41,27 @@ const CreateDoctor = () => {
         "address",
         JSON.stringify({ line1: address1, line2: address2 }),
       );
+
+      const { data } = await axios.post(
+        `${BACKEND_URL}/api/admin/create-doctor`,
+        formData,
+        { headers: { adminToken } },
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        setDocImage(false);
+        setName("");
+        setPassword("");
+        setEmail("");
+        setAddress1("");
+        setAddress2("");
+        setDegree("");
+        setAbout("");
+        setFees("");
+      } else {
+        toast.error(data.message);
+      }
     } catch (err) {
       toast.error(err.message);
     }

@@ -65,6 +65,7 @@ const createDoctor = async (req, res) => {
       degree,
       about,
       fees,
+      experience,
       address: JSON.parse(address),
       date: Date.now(),
     };
@@ -94,4 +95,13 @@ const adminLogin = async (req, res) => {
   }
 };
 
-module.exports = { createDoctor, adminLogin };
+const allDoctors = async (req, res) => {
+  try {
+    const doctors = await Doctor.find({}).select("-password");
+    res.json({ success: true, doctors });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
+};
+
+module.exports = { createDoctor, adminLogin, allDoctors };

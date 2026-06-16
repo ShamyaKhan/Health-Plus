@@ -1,6 +1,15 @@
+import { useContext, useEffect } from "react";
 import { useState } from "react";
+import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../utils/constants";
 
 const Login = () => {
+  const { token, setToken } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const [state, setState] = useState("Sign Up");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -8,10 +17,47 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      if (state === "Sign Up") {
+        const { data } = await axios.post(`${BACKEND_URL}/api/user/register`, {
+          name,
+          password,
+          email,
+        });
+
+        if (data.success) {
+          localStorage.setItem("token", data.token);
+          setToken(data.token);
+        } else {
+          toast.error(data.message);
+        }
+      } else {
+        const { data } = await axios.post(`${BACKEND_URL}/api/user/login`, {
+          password,
+          email,
+        });
+
+        if (data.success) {
+          localStorage.setItem("token", data.token);
+          setToken(data.token);
+        } else {
+          toast.error(data.message);
+        }
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
+
   return (
-    <form className="min-h-[80vh] flex items-center">
+    <form className="min-h-[80vh] flex items-center" onSubmit={handleSubmit}>
       <div
         className="flex flex-col gap-3 m-auto items-start p-8 min-w-85 sm:min-w-96 border
                    rounded-xl text-zinc-600 text-sm shadow-lg"
@@ -55,10 +101,13 @@ const Login = () => {
           />
         </div>
 
-        <button className="bg-primary text-white w-full py-2 rounded-md text-base">
+        <button
+          className="bg-primary text-white w-full py-2 rounded-md text-base"
+          type="submit"
+        >
           {state === "Sign Up" ? "Create Account" : "Login"}
         </button>
-        {state === "Sign up" ? (
+        {state === "Sign Up" ? (
           <p className="">
             Already have an account?{" "}
             <span
