@@ -1,6 +1,8 @@
 require("dotenv").config();
 
 const PORT = Number(process.env.PORT);
+const CURRENCY = process.env.CURRENCY;
+const CLIENT_URL = process.env.CLIENT_URL;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 const CLOUDINARY_NAME = process.env.CLOUDINARY_NAME;
@@ -12,8 +14,13 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
+const STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY;
+
 module.exports = {
   PORT,
+  CURRENCY,
+  CLIENT_URL,
   MONGODB_URI,
   CLOUDINARY_NAME,
   CLOUDINARY_API_KEY,
@@ -21,4 +28,6 @@ module.exports = {
   ADMIN_EMAIL,
   ADMIN_PASSWORD,
   JWT_SECRET,
+  STRIPE_SECRET_KEY,
+  STRIPE_PUBLISHABLE_KEY,
 };
