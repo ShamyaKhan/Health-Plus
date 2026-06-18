@@ -232,7 +232,7 @@ const payOnline = async (req, res) => {
       },
     });
 
-    res.json({ success: true, message: "Proceeding to pay!" });
+    res.json({ success: true, url: session.url });
   } catch (err) {
     res.json({ success: false, message: err.message });
   }
