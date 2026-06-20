@@ -64,6 +64,8 @@ const AllAppointments = () => {
             </p>
             {item.cancelled ? (
               <p className="text-red-500 text-xs font-medium">Cancelled</p>
+            ) : item.isComplete ? (
+              <p className="text-green-500 text-xs font-medium">Completed</p>
             ) : (
               <img
                 src={assets.cancel_icon}

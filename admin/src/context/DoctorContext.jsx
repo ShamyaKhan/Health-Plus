@@ -8,6 +8,8 @@ export const DoctorContext = createContext();
 
 const DoctorContextProvider = (props) => {
   const [appointments, setAppointments] = useState([]);
+  const [dashboardData, setDashboardData] = useState(false);
+  const [profileData, setProfileData] = useState(false);
 
   const [doctorToken, setDoctorToken] = useState(
     localStorage.getItem("doctorToken") || "",
@@ -68,6 +70,38 @@ const DoctorContextProvider = (props) => {
     }
   };
 
+  const getDashboardData = async () => {
+    try {
+      const { data } = await axios.get(`${BACKEND_URL}/api/doctor/dashboard`, {
+        headers: { doctorToken },
+      });
+
+      if (data.success) {
+        setDashboardData(data.dashboardData);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  const getProfileData = async () => {
+    try {
+      const { data } = await axios.get(`${BACKEND_URL}/api/doctor/profile`, {
+        headers: { doctorToken },
+      });
+
+      if (data.success) {
+        setProfileData(data.profileData);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
   const value = {
     doctorToken,
     setDoctorToken,
@@ -76,6 +110,12 @@ const DoctorContextProvider = (props) => {
     getAppointments,
     completeAppointment,
     cancelAppointment,
+    dashboardData,
+    setDashboardData,
+    getDashboardData,
+    profileData,
+    setProfileData,
+    getProfileData,
   };
 
   return (

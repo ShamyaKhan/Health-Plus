@@ -91,6 +91,67 @@ const appointmentCancel = async (req, res) => {
   }
 };
 
+const doctorDashboard = async (req, res) => {
+  try {
+    const { docId } = req.body;
+    const appointments = await Appointment.find({ docId });
+
+    let earning = 0;
+
+    appointments.map((item) => {
+      if (item.isComplete || item.payment) {
+        earning += item.amount;
+      }
+    });
+
+    let patients = [];
+
+    appointments.map((item) => {
+      if (!patients.includes(item.userId)) {
+        patients.push(item.userId);
+      }
+    });
+
+    const dashboardData = {
+      earning,
+      patients: patients.length,
+      appointments: appointments.length,
+      latestAppointments: appointments.reverse().slice(0, 5),
+    };
+
+    res.json({ success: true, dashboardData });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
+};
+
+const doctorProfile = async (req, res) => {
+  try {
+    const { docId } = req.body;
+    const profileData = await Doctor.findById(docId).select("-password");
+
+    if (!profileData) {
+      return res.json({ success: false, message: "Doctor Not Found!" });
+    }
+
+    res.json({ success: true, profileData });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
+};
+
+const updateDoctorProfile = async (req, res) => {
+  try {
+    const { docId, fees, address, available } = req.body;
+
+    await Doctor.findByIdAndUpdate(docId, { fees, address, available });
+
+    res.json({ success: true, message: "Profile Updated!" });
+  } catch (err) {
+    res.json({ success: false, message: err.message });
+  }
+};
+
 module.exports = {
   changeAvailability,
   doctorsList,
@@ -98,4 +159,7 @@ module.exports = {
   doctorAppointments,
   appointmentComplete,
   appointmentCancel,
+  doctorDashboard,
+  doctorProfile,
+  updateDoctorProfile,
 };
