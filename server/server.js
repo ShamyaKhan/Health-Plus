@@ -12,7 +12,7 @@ const app = express();
 
 const port = PORT || 4000;
 
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+// dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 app.use(express.json());
 app.use(cors());
