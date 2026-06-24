@@ -17,11 +17,12 @@ const Navbar = () => {
 
   return (
     <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400">
-      <img
-        src={assets.logo}
-        className="w-44 cursor-pointer"
+      <h2
         onClick={() => navigate("/")}
-      />
+        className="w-32 lg:w-36 border text-center cursor-pointer rounded-lg text-xl"
+      >
+        Health Plus
+      </h2>
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <NavLink to="/">
           <li className="py-1">HOME</li>

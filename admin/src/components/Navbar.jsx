@@ -20,7 +20,12 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center px-4 sm:px-10 py-3 border-b bg-white">
       <div className="flex items-center gap-2 text-xs">
-        <img src={assets.admin_logo} className="w-36 sm:w-40 cursor-pointer" />
+        <h2
+          onClick={() => navigate("/")}
+          className="w-32 lg:w-36 border text-center cursor-pointer rounded-lg text-xl"
+        >
+          Learn Station
+        </h2>
         <p className="border px-2.5 py-0.5 rounded-full border-gray-500 text-gray-600">
           {adminToken ? "Admin" : "Doctor"}
         </p>
